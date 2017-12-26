@@ -37,6 +37,7 @@ $('.post-beer').click(function () {
 });
 
 
+
 function renderBeers() {
     $('.beers').find('li').remove();
     for (i = 0; i < beers.length; i++) {
@@ -59,17 +60,28 @@ function sortByRating() {
 
 }
 
-// function reverseSort(){
-//     var newerList = beers.sort(function (a, b) {
-//      return b.rating - a.rating;
 
-//     });
-// }
+var descending = true;
 
 $('.sort-beer').click(function () {
 
     sortByRating();
-    renderBeers();
+    if (descending) {
+        reverseOrder();
+        descending = false;
+
+    } else {
+        renderBeers();
+        descending = true;
+    }
+
+
 
 });
 
+function reverseOrder() {
+    $('.beers').find('li').remove();
+    for (i = beers.length - 1; i >= 0; i--) {
+        $('.beers').append('<li>Beer Name: ' + beers[i].name + ' Beer Type: ' + beers[i].category + ' Rating: ' + beers[i].rating + '</li>');
+    }
+}
